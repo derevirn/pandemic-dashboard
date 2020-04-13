@@ -5,7 +5,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 
-data = pd.read_csv("https://s3.amazonaws.com/rawstore.datahub.io/739d58f443412d5778140f6c4a28f7c5.csv")
+data = pd.read_csv("https://raw.githubusercontent.com/datasets/covid-19/master/data/countries-aggregated.csv")
 data.replace(0, np.nan, inplace=True)
 data.dropna(thresh=3,inplace=True)
 data.loc[data["Country"] == 'US', 'Country'] = 'United States of America'
@@ -34,10 +34,12 @@ app.layout = html.Div(children=[
     html.H1(children='COVID-19 Pandemic Dashboard',
             style={'background-color': 'rgb(49, 154, 255)',
                    'color': 'white',
-                   'border-radius': '20px',
+                   'border-radius': '18px',
                    'font-size': '4.4rem',
-                   'width': '70%'}),
+                   'width': '75%'}),
     
+    
+    html.Div(children=[
     html.P(['''
     Choose the country of your preference to view a graph of the confirmed COVID-19 cases,
     deaths, and/or recovered patients. You can also hover your mouse (or tap) on the
@@ -45,13 +47,13 @@ app.layout = html.Div(children=[
     in each country. This interactive dashboard has been developed during the
     #HackCoronaGreece hackathon by Giannis Tolios. You can contact me on ''',
     html.A("LinkedIn.", href="https://www.linkedin.com/in/giannis-tolios-0020b067/")],
-    style={'width': '70%'}),
+    style={'width': '90%'}),
     
     
     html.Div(children=[        
             
     dcc.Dropdown(id='select-country',
-    style = {'margin-top': '20px', 'width': '300px'},
+    style = {'margin-top': '20px'},
     options=[{'label': item, 'value': item} for item in country_list],
     value='Greece'),
 
@@ -84,14 +86,20 @@ app.layout = html.Div(children=[
     options=[{'label': i, 'value': i} for i in ['Linear', 'Logarithmic']],
     value='Linear')],
         
-    style={'margin-bottom': '20px',
-           'box-shadow': '#8fc5f9 5px 5px 5px',
-           'width':'300px'}),
+    style={'box-shadow': '#8fc5f9 5px 5px 5px',
+           'width':'210px'})], 
+    
+    style={'columnCount': 2, 'margin-bottom': '40px'}),
     
     
-    dcc.Graph(id='graph')],
     
-    style={'width': '900px', 'margin': '30px'})
+    
+    dcc.Graph(id='graph'),
+    
+    html.Footer(["2020 Giannis Tolios"], style={'float': 'right'})
+    ],
+    
+    style={'width': '880px', 'margin': '30px'})
 
 
 @app.callback(
@@ -153,10 +161,10 @@ def update_graph(country, scale, confirmed, deaths, recovered, govt_measures):
             title="COVID-19 in " + country,
             showlegend=True,
             yaxis={'type': 'linear' if scale == 'Linear' else 'log'},
-            margin={'t': 25, 'l': 40})
+            margin={'t': 25, 'l': 30})
             
     }
         
         
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=False)
