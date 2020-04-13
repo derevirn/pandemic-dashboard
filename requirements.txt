@@ -1,4 +1,4 @@
-dash
 pandas
 numpy
+dash
 gunicorn
