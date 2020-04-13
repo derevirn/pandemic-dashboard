@@ -13,10 +13,10 @@ data.loc[data["Country"] == 'US', 'Country'] = 'United States of America'
 measures = pd.read_excel("data/acaps-covid-19-goverment-measures-dataset-v6.xlsx",
                          sheet_name="Database", parse_dates=True)
 
-measures["text"] = "<b>" + measures["DATE_IMPLEMENTED"].dt.strftime("%d-%m-%Y") \
-+ ": " + measures["MEASURE"] + "</b>" + "<br>" + measures["COMMENTS"] 
 
-measures["text"] = measures["text"].str.wrap(50)
+measures["COMMENTS"] = measures["COMMENTS"].str.wrap(50)
+measures["text"] = "<b>" + measures["DATE_IMPLEMENTED"].dt.strftime("%d-%m-%Y") \
++ "<br>" + measures["MEASURE"] + "</b>" + "<br>" + measures["COMMENTS"] 
 measures["text"] = measures["text"].str.replace('\n','<br>', regex=False)
 
 
