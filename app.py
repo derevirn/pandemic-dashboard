@@ -10,7 +10,7 @@ data.replace(0, np.nan, inplace=True)
 data.dropna(thresh=3,inplace=True)
 data.loc[data["Country"] == 'US', 'Country'] = 'United States of America'
 
-measures = pd.read_excel("https://www.acaps.org/sites/acaps/files/resources/files/acaps_covid19_government_measures_dataset.xlsx",
+measures = pd.read_excel("https://www.acaps.org/sites/acaps/files/resources/files/acaps_covid19_government_measures_datasets.xlsx",
                          sheet_name="Database", parse_dates=True)
 
 
