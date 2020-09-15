@@ -15,6 +15,7 @@ measures = pd.read_excel("data/acaps_covid19_government_measures_dataset.xlsx",
 
 
 measures["COMMENTS"] = measures["COMMENTS"].str.wrap(50)
+measures["DATE_IMPLEMENTED"] = pd.to_datetime(measures["DATE_IMPLEMENTED"])
 measures["text"] = "<b>" + measures["DATE_IMPLEMENTED"].dt.strftime("%d-%m-%Y") \
 + "<br>" + measures["MEASURE"] + "</b>" + "<br>" + measures["COMMENTS"] 
 measures["text"] = measures["text"].str.replace('\n','<br>', regex=False)
