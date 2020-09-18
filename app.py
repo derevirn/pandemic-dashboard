@@ -24,8 +24,7 @@ measures["text"] = measures["text"].str.replace('\n','<br>', regex=False)
 country_list = data["Country"].sort_values().unique()
 
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css',
-                        'https://fonts.googleapis.com/css2?family=Open+Sans']
+external_stylesheets = ['https://fonts.googleapis.com/css2?family=Open+Sans']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
 
