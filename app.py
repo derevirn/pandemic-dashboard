@@ -11,7 +11,7 @@ data.dropna(thresh=3,inplace=True)
 data.loc[data["Country"] == 'US', 'Country'] = 'United States of America'
 
 measures = pd.read_excel("data/acaps_covid19_government_measures_dataset.xlsx",
-                         sheet_name="Database", parse_dates=True)
+                         sheet_name="Dataset", parse_dates=True)
 
 
 measures["COMMENTS"] = measures["COMMENTS"].str.wrap(50)
