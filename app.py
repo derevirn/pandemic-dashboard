@@ -5,13 +5,13 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 
-data = pd.read_csv("https://raw.githubusercontent.com/datasets/covid-19/master/data/countries-aggregated.csv")
+data = pd.read_csv("https://raw.githubusercontent.com/datasets/covid-19/main/data/countries-aggregated.csv")
 data.replace(0, np.nan, inplace=True)
 data.dropna(thresh=3,inplace=True)
 data.loc[data["Country"] == 'US', 'Country'] = 'United States of America'
 
 measures = pd.read_excel("data/acaps_covid19_government_measures_dataset.xlsx",
-                         sheet_name="Dataset", parse_dates=True)
+                         sheet_name="Dataset", parse_dates=True, engine='openpyxl')
 
 
 measures["COMMENTS"] = measures["COMMENTS"].str.wrap(50)
